@@ -13,13 +13,13 @@ class RoomDetailScreen extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Text(room?.title ?? 'Voice Room', style: const TextStyle(fontWeight: FontWeight.w800, color: Colors.white, fontSize: 20)),
+        title: Text(room?.title ?? 'Voice Room', style: const TextStyle(fontWeight: FontWeight.w600, color: Colors.white, fontSize: 18)),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white),
+          icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white, size: 20),
           onPressed: () => Navigator.pop(context),
         ),
         actions: [
-          IconButton(icon: const Icon(Icons.more_horiz, color: Colors.white), onPressed: () {}),
+          IconButton(icon: const Icon(Icons.more_horiz_rounded, color: Colors.white), onPressed: () {}),
         ],
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -29,8 +29,8 @@ class RoomDetailScreen extends StatelessWidget {
         children: [
           Image.network(bgImage, fit: BoxFit.cover),
           BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
-            child: Container(color: const Color(0xFF0F0F13).withOpacity(0.7)),
+            filter: ImageFilter.blur(sigmaX: 50, sigmaY: 50),
+            child: Container(color: const Color(0xFF0D0D0D).withOpacity(0.85)),
           ),
           SafeArea(
             child: Column(
@@ -41,25 +41,17 @@ class RoomDetailScreen extends StatelessWidget {
                     children: [
                       Hero(
                         tag: 'avatar_${room?.id ?? ''}',
-                        child: _PulsingAvatar(imageUrl: bgImage, size: 110, isSpeaking: true),
+                        child: _SubtleAvatar(imageUrl: bgImage, size: 100, isSpeaking: true),
                       ),
                       const SizedBox(height: 16),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
-                        decoration: BoxDecoration(
-                          gradient: const LinearGradient(colors: [Color(0xFFE040FB), Color(0xFF00E5FF)]),
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [BoxShadow(color: const Color(0xFFE040FB).withOpacity(0.4), blurRadius: 15)],
-                        ),
-                        child: Text(room?.hostName ?? 'Host', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white)),
-                      ),
+                      Text(room?.hostName ?? 'Host', style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: Colors.white)),
                     ],
                   ),
                 ),
                 Expanded(
                   flex: 2,
                   child: GridView.builder(
-                    padding: const EdgeInsets.symmetric(horizontal: 32),
+                    padding: const EdgeInsets.symmetric(horizontal: 40),
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 4,
                       crossAxisSpacing: 20,
@@ -71,19 +63,18 @@ class RoomDetailScreen extends StatelessWidget {
                       return Column(
                         children: [
                           hasUser 
-                            ? _PulsingAvatar(imageUrl: 'https://i.pravatar.cc/150?img=${index + 20}', size: 55, isSpeaking: index == 1)
+                            ? _SubtleAvatar(imageUrl: 'https://i.pravatar.cc/150?img=${index + 20}', size: 50, isSpeaking: index == 1)
                             : Container(
-                                width: 55,
-                                height: 55,
+                                width: 50,
+                                height: 50,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: Colors.white.withOpacity(0.05),
-                                  border: Border.all(color: Colors.white.withOpacity(0.2), width: 1.5),
                                 ),
-                                child: const Icon(Icons.add, color: Colors.white54, size: 20),
+                                child: const Icon(Icons.add_rounded, color: Colors.white54, size: 20),
                               ),
                           const SizedBox(height: 8),
-                          Text(hasUser ? 'User ${index+1}' : 'Empty', style: TextStyle(fontSize: 11, color: Colors.white.withOpacity(0.7), fontWeight: FontWeight.w600)),
+                          Text(hasUser ? 'User ${index+1}' : 'Empty', style: TextStyle(fontSize: 11, color: Colors.white.withOpacity(0.6))),
                         ],
                       );
                     },
@@ -92,14 +83,13 @@ class RoomDetailScreen extends StatelessWidget {
                 Expanded(
                   flex: 3,
                   child: Container(
-                    margin: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
+                    margin: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.08),
-                      borderRadius: BorderRadius.circular(30),
-                      border: Border.all(color: Colors.white.withOpacity(0.15), width: 1.5),
+                      color: const Color(0xFF1C1C1E).withOpacity(0.5),
+                      borderRadius: BorderRadius.circular(24),
                     ),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(24),
                       child: ListView.builder(
                         padding: const EdgeInsets.all(16),
                         itemCount: 15,
@@ -110,17 +100,17 @@ class RoomDetailScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                                   decoration: BoxDecoration(
-                                    gradient: LinearGradient(colors: index % 2 == 0 ? [const Color(0xFFE040FB), const Color(0xFFFF4081)] : [const Color(0xFF00E5FF), const Color(0xFF00B0FF)]),
-                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.white.withOpacity(0.1),
+                                    borderRadius: BorderRadius.circular(6),
                                   ),
-                                  child: Text('Lv.${(index % 10) + 5}', style: const TextStyle(fontSize: 10, color: Colors.white, fontWeight: FontWeight.bold)),
+                                  child: Text('Lv.${(index % 10) + 5}', style: TextStyle(fontSize: 10, color: Colors.white.withOpacity(0.8), fontWeight: FontWeight.w500)),
                                 ),
-                                const SizedBox(width: 10),
-                                Text('User $index:', style: const TextStyle(color: Color(0xFF00E5FF), fontWeight: FontWeight.w800, fontSize: 14)),
                                 const SizedBox(width: 8),
-                                const Expanded(child: Text('Amazing room! 🔥', style: TextStyle(color: Colors.white, fontSize: 14))),
+                                Text('User $index:', style: const TextStyle(color: Color(0xFF8E8E93), fontWeight: FontWeight.w500, fontSize: 13)),
+                                const SizedBox(width: 6),
+                                const Expanded(child: Text('Amazing room! 🙌', style: TextStyle(color: Color(0xFFEBEBF5), fontSize: 13))),
                               ],
                             ),
                           );
@@ -134,10 +124,10 @@ class RoomDetailScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      _buildControlButton(Icons.message_rounded, Colors.white.withOpacity(0.15)),
-                      _buildControlButton(Icons.mic_off_rounded, Colors.white.withOpacity(0.15)),
-                      _buildControlButton(Icons.videogame_asset_rounded, const Color(0xFF00E5FF)), 
-                      _buildControlButton(Icons.card_giftcard_rounded, const Color(0xFFE040FB)), 
+                      _buildControlButton(Icons.chat_bubble_outline_rounded, Colors.white.withOpacity(0.1)),
+                      _buildControlButton(Icons.mic_off_rounded, Colors.white.withOpacity(0.1)),
+                      _buildControlButton(Icons.sports_esports_rounded, Colors.white.withOpacity(0.1)), 
+                      _buildControlButton(Icons.card_giftcard_rounded, const Color(0xFF30D158).withOpacity(0.2), iconColor: const Color(0xFF30D158)), 
                     ],
                   ),
                 )
@@ -149,46 +139,45 @@ class RoomDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildControlButton(IconData icon, Color color) {
+  Widget _buildControlButton(IconData icon, Color bgColor, {Color iconColor = Colors.white}) {
     return Container(
-      padding: const EdgeInsets.all(14),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: color,
+        color: bgColor,
         shape: BoxShape.circle,
-        boxShadow: color.opacity > 0.5 ? [BoxShadow(color: color.withOpacity(0.6), blurRadius: 15, spreadRadius: 2)] : null,
       ),
-      child: Icon(icon, color: Colors.white, size: 26),
+      child: Icon(icon, color: iconColor, size: 24),
     );
   }
 }
 
-class _PulsingAvatar extends StatefulWidget {
+class _SubtleAvatar extends StatefulWidget {
   final String imageUrl;
   final double size;
   final bool isSpeaking;
 
-  const _PulsingAvatar({required this.imageUrl, required this.size, required this.isSpeaking});
+  const _SubtleAvatar({required this.imageUrl, required this.size, required this.isSpeaking});
 
   @override
-  __PulsingAvatarState createState() => __PulsingAvatarState();
+  __SubtleAvatarState createState() => __SubtleAvatarState();
 }
 
-class __PulsingAvatarState extends State<_PulsingAvatar> with SingleTickerProviderStateMixin {
+class __SubtleAvatarState extends State<_SubtleAvatar> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 1500));
-    _animation = Tween<double>(begin: 1.0, end: 1.2).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+    _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 1000));
+    _animation = Tween<double>(begin: 1.0, end: 1.1).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
     if (widget.isSpeaking) {
       _controller.repeat(reverse: true);
     }
   }
 
   @override
-  void didUpdateWidget(_PulsingAvatar oldWidget) {
+  void didUpdateWidget(_SubtleAvatar oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.isSpeaking && !_controller.isAnimating) {
       _controller.repeat(reverse: true);
@@ -213,11 +202,11 @@ class __PulsingAvatarState extends State<_PulsingAvatar> with SingleTickerProvid
           ScaleTransition(
             scale: _animation,
             child: Container(
-              width: widget.size + 10,
-              height: widget.size + 10,
+              width: widget.size + 8,
+              height: widget.size + 8,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: const Color(0xFF00E5FF).withOpacity(0.3),
+                border: Border.all(color: const Color(0xFF30D158).withOpacity(0.5), width: 2),
               ),
             ),
           ),
@@ -226,7 +215,6 @@ class __PulsingAvatarState extends State<_PulsingAvatar> with SingleTickerProvid
           height: widget.size,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            border: Border.all(color: widget.isSpeaking ? const Color(0xFF00E5FF) : Colors.white24, width: 3),
             image: DecorationImage(image: NetworkImage(widget.imageUrl), fit: BoxFit.cover),
           ),
         ),

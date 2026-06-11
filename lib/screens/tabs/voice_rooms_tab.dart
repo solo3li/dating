@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../../data/dummy_data.dart';
 
@@ -14,57 +15,43 @@ class VoiceRoomsTab extends StatelessWidget {
             expandedHeight: 120.0,
             floating: false,
             pinned: true,
+            backgroundColor: const Color(0xFF0D0D0D).withOpacity(0.9),
             flexibleSpace: FlexibleSpaceBar(
-              titlePadding: const EdgeInsets.only(left: 16, bottom: 16),
-              title: const Text('Discover Rooms', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 24)),
-              background: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [const Color(0xFF0F0F13), const Color(0xFFE040FB).withOpacity(0.2)],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                  ),
-                ),
-              ),
+              titlePadding: const EdgeInsets.only(left: 20, bottom: 16),
+              title: const Text('Discover', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 28, letterSpacing: -0.5, color: Colors.white)),
             ),
             actions: [
-              IconButton(icon: const Icon(Icons.search, color: Colors.white), onPressed: () {}),
-              Container(
-                margin: const EdgeInsets.only(right: 16),
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  boxShadow: [BoxShadow(color: Color(0xFF00E5FF), blurRadius: 10, spreadRadius: -2)],
-                ),
-                child: IconButton(icon: const Icon(Icons.add_box, color: Color(0xFF00E5FF)), onPressed: () {}),
-              ),
+              IconButton(icon: const Icon(Icons.search_rounded, color: Colors.white, size: 28), onPressed: () {}),
+              IconButton(icon: const Icon(Icons.add_circle_rounded, color: Colors.white, size: 28), onPressed: () {}),
+              const SizedBox(width: 8),
             ],
           ),
           SliverPadding(
-            padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 100.0),
+            padding: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 100.0, top: 8.0),
             sliver: SliverList(
               delegate: SliverChildBuilderDelegate(
                 (context, index) {
                   final room = DummyData.rooms[index];
                   return TweenAnimationBuilder(
                     tween: Tween<double>(begin: 0, end: 1),
-                    duration: Duration(milliseconds: 400 + (index * 100)),
+                    duration: Duration(milliseconds: 300 + (index * 100)),
                     curve: Curves.easeOutCubic,
                     builder: (context, double value, child) {
                       return Transform.translate(
-                        offset: Offset(0, 30 * (1 - value)),
+                        offset: Offset(0, 20 * (1 - value)),
                         child: Opacity(opacity: value, child: child),
                       );
                     },
                     child: GestureDetector(
                       onTap: () => Navigator.pushNamed(context, '/room', arguments: room),
                       child: Container(
-                        margin: const EdgeInsets.symmetric(vertical: 10.0),
+                        margin: const EdgeInsets.symmetric(vertical: 8.0),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF1E1E24),
+                          color: const Color(0xFF1C1C1E),
                           borderRadius: BorderRadius.circular(24),
                           border: Border.all(color: Colors.white.withOpacity(0.05)),
                           boxShadow: [
-                            BoxShadow(color: const Color(0xFFE040FB).withOpacity(0.08), blurRadius: 20, spreadRadius: 1),
+                            BoxShadow(color: Colors.black.withOpacity(0.2), blurRadius: 10, offset: const Offset(0, 4)),
                           ],
                         ),
                         child: Padding(
@@ -74,13 +61,11 @@ class VoiceRoomsTab extends StatelessWidget {
                               Hero(
                                 tag: 'avatar_${room.id}',
                                 child: Container(
-                                  width: 65,
-                                  height: 65,
+                                  width: 60,
+                                  height: 60,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
-                                    border: Border.all(color: const Color(0xFFE040FB), width: 2.5),
                                     image: DecorationImage(image: NetworkImage(room.hostAvatar), fit: BoxFit.cover),
-                                    boxShadow: [BoxShadow(color: const Color(0xFFE040FB).withOpacity(0.4), blurRadius: 10)],
                                   ),
                                 ),
                               ),
@@ -89,9 +74,9 @@ class VoiceRoomsTab extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(room.title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
+                                    Text(room.title, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: Colors.white)),
                                     const SizedBox(height: 4),
-                                    Text(room.hostName, style: TextStyle(color: Colors.white.withOpacity(0.6), fontSize: 14)),
+                                    Text(room.hostName, style: const TextStyle(color: Color(0xFF8E8E93), fontSize: 14)),
                                     const SizedBox(height: 10),
                                     Wrap(
                                       spacing: 8,
@@ -99,11 +84,10 @@ class VoiceRoomsTab extends StatelessWidget {
                                       children: room.tags.map((tag) => Container(
                                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                                         decoration: BoxDecoration(
-                                          color: const Color(0xFFE040FB).withOpacity(0.15),
+                                          color: const Color(0xFF2C2C2E),
                                           borderRadius: BorderRadius.circular(12),
-                                          border: Border.all(color: const Color(0xFFE040FB).withOpacity(0.3)),
                                         ),
-                                        child: Text(tag, style: const TextStyle(color: Color(0xFFE040FB), fontSize: 11, fontWeight: FontWeight.w600)),
+                                        child: Text(tag, style: const TextStyle(color: Color(0xFFEBEBF5), fontSize: 11, fontWeight: FontWeight.w500)),
                                       )).toList(),
                                     ),
                                   ],
@@ -115,18 +99,17 @@ class VoiceRoomsTab extends StatelessWidget {
                                   Container(
                                     padding: const EdgeInsets.all(8),
                                     decoration: BoxDecoration(
-                                      gradient: const LinearGradient(colors: [Color(0xFF00E5FF), Color(0xFF00B0FF)]),
+                                      color: const Color(0xFF30D158).withOpacity(0.15),
                                       shape: BoxShape.circle,
-                                      boxShadow: [BoxShadow(color: const Color(0xFF00E5FF).withOpacity(0.5), blurRadius: 8)],
                                     ),
-                                    child: const Icon(Icons.graphic_eq, color: Colors.black, size: 18),
+                                    child: const Icon(Icons.graphic_eq_rounded, color: Color(0xFF30D158), size: 18),
                                   ),
-                                  const SizedBox(height: 12),
+                                  const SizedBox(height: 8),
                                   Row(
                                     children: [
-                                      const Icon(Icons.people_alt, color: Colors.grey, size: 14),
+                                      const Icon(Icons.person_rounded, color: Color(0xFF8E8E93), size: 14),
                                       const SizedBox(width: 4),
-                                      Text('${room.onlineCount}', style: const TextStyle(color: Colors.grey, fontSize: 13, fontWeight: FontWeight.bold)),
+                                      Text('${room.onlineCount}', style: const TextStyle(color: Color(0xFF8E8E93), fontSize: 12, fontWeight: FontWeight.w600)),
                                     ],
                                   )
                                 ],

@@ -101,6 +101,9 @@ class DummyData {
     VoiceRoom(id: 'r5', title: 'Looking for Friends ✨', hostName: 'Nour', hostAvatar: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&q=80', category: 'Dating', onlineCount: 500, language: 'AR', tags: ['Match', 'New Friends']),
     VoiceRoom(id: 'r6', title: 'Poetry & Art 🎨', hostName: 'Youssef', hostAvatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80', category: 'Culture', onlineCount: 40, language: 'AR', tags: ['Poetry', 'Deep Talk']),
     VoiceRoom(id: 'r7', title: 'Tech Talk 💻', hostName: 'Mona', hostAvatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=80', category: 'Tech', onlineCount: 120, language: 'EN', tags: ['Flutter', 'Coding']),
+    VoiceRoom(id: 'r8', title: 'Gaming Lounge 🎮', hostName: 'Alex', hostAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=80', category: 'Games', onlineCount: 300, language: 'EN', tags: ['Valorant', 'PC', 'Co-op']),
+    VoiceRoom(id: 'r9', title: 'Morning Coffee ☀️', hostName: 'Salma', hostAvatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&q=80', category: 'Chat', onlineCount: 150, language: 'AR', tags: ['Morning', 'Vibes']),
+    VoiceRoom(id: 'r10', title: 'Guitar Covers 🎸', hostName: 'Dani', hostAvatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&q=80', category: 'Music', onlineCount: 420, language: 'EN', tags: ['Live', 'Guitar']),
   ];
 
   static final List<LiveHost> hosts = [
@@ -110,6 +113,8 @@ class DummyData {
     LiveHost(id: 'h4', name: 'Ziad Gamer', avatarUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80', viewers: 4120, level: 42),
     LiveHost(id: 'h5', name: 'Leila Beauty', avatarUrl: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&q=80', viewers: 9800, level: 60),
     LiveHost(id: 'h6', name: 'Tarek Vlogs', avatarUrl: 'https://images.unsplash.com/photo-1528892952291-009c663ce843?w=400&q=80', viewers: 3200, level: 25, isPkMode: true),
+    LiveHost(id: 'h7', name: 'Amelia Rose', avatarUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80', viewers: 18500, level: 92, isPkMode: false),
+    LiveHost(id: 'h8', name: 'Chris Top', avatarUrl: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=400&q=80', viewers: 1200, level: 15),
   ];
 
   static final List<Agency> agencies = [
